@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+	
+	<!-- Root Context: defines shared resources visible to all other web components -->
+	<bean id="simpleService" class="com.spring5.sample.batch.service.SimpleService"/>
+	
+	<!-- Spring 3.x 아래에선 아래의 class 사용 -->
+	<!-- <bean id="simpleJob" class="org.springframework.scheduling.quartz.JobDetailBean">  -->
+	<bean id="simpleJob" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.spring5.sample.batch.job.SimpleJob"/>
+        <!-- jobDataAsMap는 autowired가 필요한 객체들을 선언해준다. -->
+        <property name="jobDataAsMap">
+            <map>
+            	<entry key="simpleService" value-ref="simpleService" />
+            </map>
+        </property>
+    </bean>
+	
+	<!-- Spring 3.x 아래에선 아래의 class 사용 -->
+	<!-- <bean id="simpleCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">  -->
+	<bean id="simpleCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="simpleJob"/>
+        <property name="cronExpression" value="0/30 * * ? * MON-FRI"/><!-- 15초 마다 -->
+    </bean>
+	
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <ref bean="simpleCronTrigger"/>
+            </list>
+        </property>
+    </bean>
+</beans>
