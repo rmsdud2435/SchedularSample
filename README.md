@@ -1,6 +1,13 @@
 # Spring5-SchedularSample
 Quartz Scheduling 관련하여 테스트 및 활용하기 위한 샘플
 
+## 사용된 버전
+
+>java : 1.8.X
+>spring : 5.0.X
+>quartz : 2.3.X
+
+
 ## 특이사항
 
 ### SimpleService의 printHelloWorld()
