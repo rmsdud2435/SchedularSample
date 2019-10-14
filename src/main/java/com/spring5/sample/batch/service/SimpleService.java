@@ -11,9 +11,9 @@ public class SimpleService {
 		logger.info("Hello World");
 	}
 	
-	public void sleepFor3seconds() throws InterruptedException{
+	public void sleepFor10seconds() throws InterruptedException{
 		logger.info("Sleep Start");
-		Thread.sleep(3000);
+		Thread.sleep(10000);
 		logger.info("Sleep End");
 	}
 }

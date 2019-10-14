@@ -22,7 +22,7 @@
 	<!-- <bean id="simpleCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">  -->
 	<bean id="simpleCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="simpleJob"/>
-        <property name="cronExpression" value="0/30 * * ? * MON-FRI"/><!-- 15초 마다 -->
+        <property name="cronExpression" value="0/10 * * ? * MON-FRI"/><!-- 15초 마다 -->
     </bean>
 	
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
