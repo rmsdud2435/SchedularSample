@@ -12,4 +12,6 @@ Quartz Scheduling 관련하여 테스트 및 활용하기 위한 샘플
 
 실행 시간이 오래 걸리는 Job 테스트를 위한 메소드
 
-### @DisallowConcurrentExecution을 활용한 중복 제거
+### @DisallowConcurrentExecution
+
+@DisallowConcurrentExecution을 활용하여 중복제거
