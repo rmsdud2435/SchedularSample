@@ -13,7 +13,7 @@ public class SimpleService {
 	
 	public void sleepFor10seconds() throws InterruptedException{
 		logger.info("Sleep Start");
-		Thread.sleep(10000);
+		Thread.sleep(8000);
 		logger.info("Sleep End");
 	}
 }

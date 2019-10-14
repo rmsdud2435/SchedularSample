@@ -17,18 +17,41 @@
             </map>
         </property>
     </bean>
+    
+    <bean id="simpleJob2" class="org.springframework.scheduling.quartz.JobDetailFactoryBean">
+        <property name="jobClass" value="com.spring5.sample.batch.job.SimpleJob2"/>
+        <!-- jobDataAsMap는 autowired가 필요한 객체들을 선언해준다. -->
+        <property name="jobDataAsMap">
+            <map>
+            	<entry key="simpleService" value-ref="simpleService" />
+            </map>
+        </property>
+    </bean>
+    
+    <!-- 이 방식또한 JobDetailFactoryBean과 비슷. JobDetailFactoryBean가 더 난 듯 -->
+    <bean id="simpleJob3" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+        <property name="targetObject" ref="simpleService"/>
+        <property name="targetMethod" value="sleepFor10seconds" />
+        <property name="concurrent" value="false" />
+    </bean>
 	
 	<!-- Spring 3.x 아래에선 아래의 class 사용 -->
 	<!-- <bean id="simpleCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean">  -->
 	<bean id="simpleCronTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
         <property name="jobDetail" ref="simpleJob"/>
-        <property name="cronExpression" value="0/10 * * ? * MON-FRI"/><!-- 15초 마다 -->
+        <property name="cronExpression" value="0/5 * * ? * MON-FRI"/><!-- 15초 마다 -->
+    </bean>
+    
+    <bean id="simpleCronTrigger2" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+        <property name="jobDetail" ref="simpleJob2"/>
+        <property name="cronExpression" value="0/7 * * ? * MON-FRI"/><!-- 15초 마다 -->
     </bean>
 	
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
         <property name="triggers">
             <list>
                 <ref bean="simpleCronTrigger"/>
+                <ref bean="simpleCronTrigger2"/>
             </list>
         </property>
     </bean>

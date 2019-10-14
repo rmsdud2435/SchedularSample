@@ -3,6 +3,7 @@ package com.spring5.sample.batch.job;
 import org.quartz.DisallowConcurrentExecution;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.quartz.PersistJobDataAfterExecution;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.quartz.QuartzJobBean;
@@ -10,7 +11,7 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 import com.spring5.sample.batch.service.SimpleService;
 
 //중복을 방지하기 위한 어노테이션
-@DisallowConcurrentExecution
+//@DisallowConcurrentExecution
 public class SimpleJob extends QuartzJobBean{
 
 	private static final Logger logger = LoggerFactory.getLogger(SimpleJob.class);
